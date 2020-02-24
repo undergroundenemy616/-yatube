@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Добавить запись{% endblock %}
+{% block content %}
+{# загружаем фильтр #}
+{% load user_filters %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 p-5">
+        <div class="card">
+            <div class="card-header">Добавление записи</div>
+            <div class="card-body">
+
+                {% if form.errors %}
+                    {% for error in form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error|escape }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    {{form.as_p}}
+
+                    <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                Отправить
+                            </button>
+                    </div>
+                </form>
+            </div> <!-- card body -->
+        </div> <!-- card -->
+    </div> <!-- col -->
+</div> <!-- row -->
+
+{% endblock %}
