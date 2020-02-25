@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 {% block title %} {{ tmp_user.get_full_name }} {% endblock %}
 {% block content %}
 <main role="main" class="container">
@@ -36,34 +37,10 @@
 
                 <!-- Повторяющиеся записи -->
 
-                {% for post in page %}
-
-
-                    <div class="card mb-3 mt-1 shadow-sm">
-                            <div class="card-body">
-                                    <p class="card-text">
-                                            <!-- Ссылка на страницу автора в атрибуте href; username автора в тексте ссылки -->
-                                            <a href="{% url 'profile' tmp_user.get_username %}"><strong class="d-block text-gray-dark">@{{ tmp_user.get_username }}</strong></a>
-                                            <!-- Текст поста -->
-                                            {{ post.text }}
-                                    </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group ">
-                                                    <!-- Ссылка на страницу записи в атрибуте href-->
-                                                    <a class="btn btn-sm text-muted" href="{% url 'post' tmp_user.get_username post.id %}" role="button">Добавить комментарий</a>
-                                                    <!-- Ссылка на редактирование, показывается только автору записи -->
-                                                    {% if tmp_user == user %}
-                                                        <a class="btn btn-sm text-muted" href="{% url 'post_edit'  tmp_user.get_username post.id %}" role="button">Редактировать</a>
-                                                    {% endif %}
-
-                                            </div>
-                                            <!-- Дата публикации  -->
-                                            {{ post.pub_date|date:"d M Y" }}
-                                            <small class="text-muted"></small>
-                                    </div>
-                            </div>
-                    </div>
-                {% endfor %}
+                    {% for post in page %}
+            <!-- Вот он, новый include! -->
+                        {% include "post_item.html" with post=post %}
+                    {% endfor %}
 
                 <!-- Конец блока с отдельным постом -->
 

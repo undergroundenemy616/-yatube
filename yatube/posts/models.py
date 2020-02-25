@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+
 User = get_user_model()
 
 
@@ -18,3 +19,17 @@ class Post(models.Model):
     pub_date = models.DateTimeField("date published", auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author_posts")
     group = models.ForeignKey(Group, on_delete=models.SET_NULL, blank=True, null=True)
+    image = models.ImageField(upload_to='posts/', null=True)
+    comment_count = models.IntegerField(null=True)
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    pub_date = models.DateTimeField("date published", auto_now_add=True)
+
+
+class Favourite(models.Model):
+    user = models.ForeignKey(User, related_name="follower", on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)

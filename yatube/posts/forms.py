@@ -1,11 +1,11 @@
-from .models import Post
+from .models import Post, Comment
 from django.forms import ModelForm
 
 
 class PostFrom(ModelForm):
     class Meta:
         model = Post
-        fields = ("group", "text")
+        fields = ("group", "text", "image")
         required = {
             "group": False,
         }
@@ -13,3 +13,9 @@ class PostFrom(ModelForm):
             "group": "Сообщества",
             "text": "Текст записи"
         }
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ("text",)
