@@ -22,14 +22,26 @@ class Post(models.Model):
     image = models.ImageField(upload_to='posts/', null=True)
     comment_count = models.IntegerField(null=True)
 
+    def __str__(self):
+        return self.title
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-    pub_date = models.DateTimeField("date published", auto_now_add=True)
+    created = models.DateTimeField("date published", auto_now_add=True)
+
+    def __str__(self):
+        return self.title
 
 
-class Favourite(models.Model):
+class Follow(models.Model):
     user = models.ForeignKey(User, related_name="follower", on_delete=models.CASCADE)
     author = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = [["user", "author"]]
+
+    def __str__(self):
+        return self.title
