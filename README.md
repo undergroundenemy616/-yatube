@@ -1,2 +1,2 @@
 # -yatube
-Social network of bloggers
+Социальная сеть для публикации личных дневников Yatube.
