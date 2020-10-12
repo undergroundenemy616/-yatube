@@ -6,4 +6,7 @@ Yatube
 Стек: python3.+, Django 2.+, SQLite.
 
 ![alt tag](http://images.vfl.ru/ii/1602520466/66afb9d5/31916517.png
- "Описание будет тут")
+ "Главная страница")
+ 
+ ![alt tag](http://images.vfl.ru/ii/1602520717/628a144a/31916589.png
+ "Страница отдельного поста")
